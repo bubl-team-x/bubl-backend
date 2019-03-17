@@ -3,7 +3,7 @@ Bubl: Imagine a social platform that helps students transition from elementary s
 
 User can create an account, join an existing school account, and search for existing bubls to join. They can explore interests through hashtag searches. They can connect with others and share experiences.  
 
-Vision Overview: https://files.monday.com/1785069/resources/23115107/BUBL.pdf?AWSAccessKeyId=AKIAIBXETYZ5GWEDGU2Q&Expires=1552761119&Signature=xS4oUkc6rTdoxqsJdkQPzU9pglM%3D
+Vision Overview: https://lambdaschool.monday.com/protected_static/1785069/resources/23115107/BUBL.pdf
 
 - **All Team members** are to work together to fill out their relevant pieces of the Bubl Technical Design Document (TDD) - https://docs.google.com/document/d/1VpjI7Rp9BRtLEpuDDszcPeO_7V-DhIJEeVC2_hLn8pc/edit
 
