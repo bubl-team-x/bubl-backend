@@ -47,6 +47,28 @@ router.post('/schools', async (req, res) => {
             error: 'Create School failed'
         })
     }
+});
+
+// UPDATE REQUEST
+// UPDATE SCHOOL REQUEST
+router.put('/schools/:id', async (req, res) => {
+    try {
+        const id = await req.params.id;
+        const body = await req.body;
+        const updateSchool = await Schools.update(id, body);
+
+        if (updateSchool) {
+            res.status(202).json(updateSchool)
+        } else {
+            res.status(404).json({
+                message: 'The school could not be found to update.'
+            })
+        }
+    } catch {
+        res.status(500).json({
+            error: 'There was a problem updating the school.'
+        })
+    }
 })
 
 module.exports = router;
