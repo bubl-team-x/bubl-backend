@@ -9,6 +9,10 @@ exports.up = function (knex, Promise) {
             .notNullable()
 
         students
+            .string('password', 255)
+            .notNullable()
+
+        students
             .string('school_name', 128)
             .notNullable()
     });
