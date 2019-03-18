@@ -1,23 +1,23 @@
 const router = require('express').Router();
 
-const Schools = require('./schools-model');
+const Schools = require('./students-model');
 
 // GET REQUEST
 // GET ALL SCHOOLS
-router.get('/schools', (req, res) => {
+router.get('/students', (req, res) => {
     Schools.find()
         .then(schools => {
             res.status(200).json(schools)
         })
         .catch(error => {
             res.status(500).json({
-                error: 'There was a problem retrieving the schools.'
+                error: 'There was a problem retrieving the student.'
             })
         })
 });
 
 // GET SCHOOL REQUEST
-router.get('/schools/:id', async (req, res) => {
+router.get('/students/:id', async (req, res) => {
     try {
         const school = await Schools.find(req.params.id)
 
@@ -25,33 +25,33 @@ router.get('/schools/:id', async (req, res) => {
             res.status(200).json(school)
         } else {
             res.status(404).json({
-                message: 'The School was not found.'
+                message: 'The Student was not found.'
             })
         }
 
     } catch {
         res.status(500).json({
-            error: 'There was a problem retrieving the school.'
+            error: 'There was a problem retrieving the student.'
         })
     }
 })
 
 // POST REQUEST
 // POST SCHOOL REQUEST
-router.post('/schools', async (req, res) => {
+router.post('/students', async (req, res) => {
     try {
         const postSchool = await Schools.insert(req.body);
         res.status(201).json(postSchool)
     } catch {
         res.status(500).json({
-            error: 'Create School failed'
+            error: 'Create Student failed'
         })
     }
 });
 
 // UPDATE REQUEST
 // UPDATE SCHOOL REQUEST
-router.put('/schools/:id', async (req, res) => {
+router.put('/students/:id', async (req, res) => {
     try {
         const id = await req.params.id;
         const body = await req.body;
@@ -61,35 +61,35 @@ router.put('/schools/:id', async (req, res) => {
             res.status(202).json(updateSchool)
         } else {
             res.status(404).json({
-                message: 'The school could not be found to update.'
+                message: 'The student could not be found to update.'
             })
         }
     } catch {
         res.status(500).json({
-            error: 'There was a problem updating the school.'
+            error: 'There was a problem updating the student.'
         })
     }
 })
 
 // DELETE REQUEST
 // DELETE SCHOOL REQUEST
-router.delete('/schools/:id', async (req, res) => {
+router.delete('/students/:id', async (req, res) => {
     try {
         const id = await req.params.id;
         const deleteSchool = await Schools.remove(id);
 
         if (deleteSchool) {
             res.status(200).json({
-                message: 'The school was deleted successfully.'
+                message: 'The student was deleted successfully.'
             })
         } else {
             res.status(404).json({
-                message: 'The school could not be found to be deleted.'
+                message: 'The student could not be found to be deleted.'
             })
         }
     } catch {
         res.status(500).json({
-            error: 'There was a problem deleting the school.'
+            error: 'There was a problem deleting the student.'
         })
     }
 })

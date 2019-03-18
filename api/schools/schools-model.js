@@ -4,7 +4,8 @@ module.exports = {
     find,
     findById,
     insert,
-    update
+    update,
+    remove
 }
 
 function find(id) {
@@ -36,4 +37,10 @@ function update(id, changes) {
         .where('id', id)
         .update(changes)
         .then(count => count > 0 ? this.find(id) : null)
+}
+
+function remove(id) {
+    return db('schools')
+        .where('id', id)
+        .del()
 }
