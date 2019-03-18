@@ -1,0 +1,28 @@
+{
+  "name": "bubl-backend",
+  "version": "1.0.0",
+  "description": "Bubl: Imagine a social platform that helps students transition from elementary school to middle school. Bubl is a school specific social network and friendship connection tool.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bubl-team-x/bubl-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bubl-team-x/bubl-backend/issues"
+  },
+  "homepage": "https://github.com/bubl-team-x/bubl-backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "knex": "^0.16.3",
+    "nodemon": "^1.18.10",
+    "sqlite3": "^4.0.6"
+  }
+}
