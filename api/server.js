@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 
 const schoolsRouter = require('./schools/schools-router');
+const studentsRouter = require('./students/students-router');
 
 const server = express();
 
@@ -13,6 +14,7 @@ server.use(helmet());
 server.use(morgan());
 
 server.use('/api', schoolsRouter);
+server.use('/api', studentsRouter);
 
 server.get('/', (req, res) => {
     res.send('Server Running');
