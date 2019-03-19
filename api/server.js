@@ -19,7 +19,9 @@ server.use('/api', studentsRouter);
 server.use('/api', hashtagsRouter);
 
 server.get('/', (req, res) => {
-    res.send('Server Running');
+    res.status(200).json({
+        api: 'server running'
+    });
 });
 
 module.exports = server;
