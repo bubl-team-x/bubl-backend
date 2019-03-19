@@ -1,15 +1,27 @@
-const axios = require('axios');
+require('dotenv').config();
+const router = require('express').Router();
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
+const jwtKey = process.env.JWT_SECRET || 'top secret info';
 const Students = require('../students/students-model');
-const { authenticate, generateToken } = require('../auth/authenticate');
 
-module.exports = server => {
-    server.post('/api/register', register);
-    server.post('/api/login', login);
-};
+// GENERATE TOKEN
+function generateToken(student) {
+    const payload = {
+        subject: student.id,
+        student_name: student.student_name
+    }
 
-function register(req, res) {
+    const options = {
+        expiresIn: '1d'
+    }
+
+    return jwt.sign(payload, jwtKey, options)
+}
+
+//POST REQUEST FOR REGISTER
+router.post('/register', (req, res) => {
     const student = req.body;
 
     const hash = bcrypt.hashSync(student.password, 8)
@@ -22,9 +34,10 @@ function register(req, res) {
         .catch(err => {
             res.status(500).json(err)
         })
-}
+})
 
-function login(req, res) {
+// POST REQUEST FOR LOGIN
+router.post('/login', (req, res) => {
     let { student_name, password } = req.body;
 
     Students.findStudentBy({ student_name })
@@ -45,4 +58,4 @@ function login(req, res) {
         .catch(err => {
             res.status(401).json(err)
         })
-}
+})

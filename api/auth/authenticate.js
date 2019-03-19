@@ -1,15 +1,7 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
-const jwtKey = process.env.JWT_SECRET || 'top secret info';
-
-module.exports = {
-    authenticate,
-    generateToken
-};
-
-// AUTHENTICATION FUNCTION
-function authenticate(req, res, next) {
+module.exports = (req, res, next) => {
     const token = req.headers.authorization;
 
     if (token) {
@@ -27,17 +19,3 @@ function authenticate(req, res, next) {
         });
     };
 };
-
-// GENERATE TOKEN
-function generateToken(student) {
-    const payload = {
-        subject: student.id,
-        student_name: student.student_name
-    }
-
-    const options = {
-        expiresIn: '1d'
-    }
-
-    return jwt.sign(payload, jwtKey, options)
-}
