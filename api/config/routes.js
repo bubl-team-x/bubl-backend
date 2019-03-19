@@ -59,3 +59,5 @@ router.post('/login', (req, res) => {
             res.status(401).json(err)
         })
 })
+
+module.exports = router;
