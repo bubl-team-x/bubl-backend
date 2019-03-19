@@ -36,17 +36,15 @@ module.exports = {
   production: {
     client: 'sqlite3',
     connection: {
-      database: './data/bubl.db3',
-      user: 'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
+      filename: './data/bubl.db3'
     },
     migrations: {
+      directory: './data/migrations',
       tableName: 'dbBubl'
-    }
-  }
-
+    },
+    seed: {
+      directory: './data/seeds'
+    },
+    useNullAsDefault: true
+  },
 };
