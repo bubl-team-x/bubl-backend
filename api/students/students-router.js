@@ -19,7 +19,7 @@ router.get('/students', (req, res) => {
 // GET SCHOOL REQUEST
 router.get('/students/:id', async (req, res) => {
     try {
-        const student = await Students.find(req.params.id)
+        const student = await Students.findStudentById(req.params.id)
 
         if (student) {
             res.status(200).json(student)
@@ -40,7 +40,8 @@ router.get('/students/:id', async (req, res) => {
 // POST SCHOOL REQUEST
 router.post('/students', async (req, res) => {
     try {
-        const postStudent = await Students.insert(req.body);
+        console.log(req.body)
+        const postStudent = await Students.add(req.body);
         res.status(201).json(postStudent)
     } catch {
         res.status(500).json({
