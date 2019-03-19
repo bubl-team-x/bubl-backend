@@ -34,9 +34,9 @@ module.exports = {
   },
 
   production: {
-    client: 'postgresql',
+    client: 'sqlite3',
     connection: {
-      database: 'my_db',
+      database: './data/bubl.db3',
       user: 'username',
       password: 'password'
     },
@@ -45,7 +45,7 @@ module.exports = {
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations'
+      tableName: 'dbBubl'
     }
   }
 
