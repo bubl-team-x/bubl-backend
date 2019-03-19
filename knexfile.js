@@ -34,17 +34,18 @@ module.exports = {
   },
 
   production: {
-    client: 'sqlite3',
+    client: 'postgresql',
     connection: {
-      filename: './data/bubl.db3'
+      database: 'my_db',
+      user: 'username',
+      password: 'password'
+    },
+    pool: {
+      min: 2,
+      max: 10
     },
     migrations: {
-      directory: './data/migrations',
-      tableName: 'dbBubl'
-    },
-    seed: {
-      directory: './data/seeds'
-    },
-    useNullAsDefault: true
+      tableName: 'knex_migrations'
+    }
   },
 };
