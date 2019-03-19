@@ -12,7 +12,7 @@ module.exports = {
 
 function find() {
     return db('students')
-        .select('id', 'student_name', 'password', 'school_name')
+        .select('id', 'student_name', 'password', 'school_name', 'age', 'height', 'hobbies')
 }
 
 function findStudentBy(filter) {
