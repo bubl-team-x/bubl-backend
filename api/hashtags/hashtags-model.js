@@ -18,6 +18,8 @@ function find(id) {
     }
 
     return query
+        .select('label')
+        .orderBy('label')
 }
 
 function findById(id) {
