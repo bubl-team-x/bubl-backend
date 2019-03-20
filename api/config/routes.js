@@ -43,10 +43,11 @@ router.post('/login', (req, res) => {
     Students.findStudentBy({ student_name })
         .first()
         .then(student => {
+            console.log(student)
             if (student && bcrypt.compareSync(password, student.password)) {
                 const token = generateToken(student)
                 res.status(200).json({
-                    message: 'Welcome ${student.student_name}',
+                    message: `Welcome ${student.student_name}`,
                     token
                 })
             } else {
