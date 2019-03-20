@@ -5,9 +5,12 @@ exports.up = function (knex, Promise) {
             .increments()
 
         hashtags
-            .string('description', 128)
+            .string('label', 128)
             .notNullable()
-            .unique()
+
+        hashtags
+            .integer('value')
+            .defaultTo(1)
     })
 };
 
