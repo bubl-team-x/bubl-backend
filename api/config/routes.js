@@ -30,6 +30,7 @@ router.post('/register', (req, res) => {
     Students.add(student)
         .then(savedStudent => {
             res.status(200).json(savedStudent)
+            console.log('hitting the server')
         })
         .catch(err => {
             res.status(500).json(err)
