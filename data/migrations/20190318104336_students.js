@@ -1,6 +1,6 @@
 
 exports.up = function (knex, Promise) {
-    return knex.schema.createTable('students', function (students) {
+    return knex.schema.table('students', function (students) {
         students
             .increments()
 
@@ -15,7 +15,17 @@ exports.up = function (knex, Promise) {
         students
             .string('school_name', 128)
             .notNullable()
+
+        students
+            .integer('age')
+
+        students
+            .string('hobbies', 512)
+
+        students
+            .integer('height')
     });
+
 };
 
 exports.down = function (knex, Promise) {
