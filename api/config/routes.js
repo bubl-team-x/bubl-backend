@@ -30,7 +30,8 @@ router.post('/register', (req, res) => {
     Students.add(student)
         .then(savedStudent => {
             console.log(savedStudent);
-            res.status(201).json(savedStudent)
+            const token = generateToken(student)
+            res.status(201).json({ savedStudent, token })
         })
         .catch(err => {
             res.status(500).json(err)
