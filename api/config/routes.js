@@ -2,6 +2,7 @@ require('dotenv').config();
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const db = require('../../data/dbConfig');
 
 const jwtKey = process.env.JWT_SECRET || 'top secret info';
 const Students = require('../students/students-model');
@@ -33,7 +34,7 @@ router.post('/register', (req, res) => {
     //     console.log(error)
     //     return res.status(500).json(error)
     // }
-    Students.insert(student)
+    db('students').insert(student)
         .then(savedStudent => {
             console.log(savedStudent);
             return res.status(201).json(savedStudent)
