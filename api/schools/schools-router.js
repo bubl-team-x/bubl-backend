@@ -40,7 +40,7 @@ router.get('/schools/:id', async (req, res) => {
 // POST SCHOOL REQUEST
 router.post('/schools', async (req, res) => {
     try {
-        const postSchool = await Schools.insert(req.body);
+        const postSchool = await Schools.add(req.body);
         res.status(201).json(postSchool)
     } catch {
         res.status(500).json({
