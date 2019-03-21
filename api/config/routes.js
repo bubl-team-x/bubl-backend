@@ -21,21 +21,29 @@ function generateToken(student) {
 }
 
 //POST REQUEST FOR REGISTER
-router.post('/register', (req, res) => {
-    const student = req.body;
+router.post('/register', async, (req, res) => {
+    let student = req.body;
 
     const hash = bcrypt.hashSync(student.password, 8)
     student.password = hash;
+    try {
+        const newStudent = await Students.add(student)
 
-    Students.add(student)
-        .then(savedStudent => {
-            console.log(savedStudent);
-            const token = generateToken(student)
-            return res.status(201).json({ savedStudent, token })
-        })
-        .catch(err => {
-            res.status(500).json(err)
-        })
+        return res.status(201).json({ newStudent })
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json(err)
+    }
+    // Students.add(student)
+    //     .then(savedStudent => {
+    //         console.log(savedStudent);
+    //         const token = generateToken(student)
+    //         return res.status(201).json({ savedStudent, token })
+    //     })
+    //     .catch(err => {
+    //         res.status(500).json(err)
+    //     })
 })
 
 // POST REQUEST FOR LOGIN
