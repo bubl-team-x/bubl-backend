@@ -3,7 +3,7 @@ const router = require('express').Router();
 const Students = require('./students-model');
 
 // GET REQUEST
-// GET ALL SCHOOLS
+// GET ALL STUDENTS
 router.get('/students', (req, res) => {
     Students.find()
         .then(students => {
@@ -16,7 +16,7 @@ router.get('/students', (req, res) => {
         })
 });
 
-// GET SCHOOL REQUEST
+// GET STUDENT REQUEST
 router.get('/students/:id', async (req, res) => {
     try {
         const student = await Students.findStudentById(req.params.id)
@@ -37,7 +37,7 @@ router.get('/students/:id', async (req, res) => {
 })
 
 // POST REQUEST
-// POST SCHOOL REQUEST
+// POST STUDENT REQUEST
 router.post('/students', async (req, res) => {
     try {
         console.log(req.body)
@@ -51,7 +51,7 @@ router.post('/students', async (req, res) => {
 });
 
 // UPDATE REQUEST
-// UPDATE SCHOOL REQUEST
+// UPDATE STUDENT REQUEST
 router.put('/students/:id', async (req, res) => {
     try {
         const id = await req.params.id;
@@ -73,7 +73,7 @@ router.put('/students/:id', async (req, res) => {
 })
 
 // DELETE REQUEST
-// DELETE SCHOOL REQUEST
+// DELETE STUDENT REQUEST
 router.delete('/students/:id', async (req, res) => {
     try {
         const id = await req.params.id;

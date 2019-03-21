@@ -3,7 +3,7 @@ const router = require('express').Router();
 const Hashtags = require('./hashtags-model');
 
 // GET REQUEST
-// GET ALL SCHOOLS
+// GET ALL HASHTAGS
 router.get('/hashtags', (req, res) => {
     Hashtags.find()
         .then(hashtags => {
@@ -32,7 +32,7 @@ router.get('/hashtags', (req, res) => {
         })
 });
 
-// GET SCHOOL REQUEST
+// GET INDIVIDUAL HASHTAG REQUEST
 router.get('/hashtags/:id', async (req, res) => {
     try {
         const hashtag = await Hashtags.find(req.params.id)
@@ -53,7 +53,7 @@ router.get('/hashtags/:id', async (req, res) => {
 })
 
 // POST REQUEST
-// POST SCHOOL REQUEST
+// POST HASHTAG REQUEST
 router.post('/hashtags', async (req, res) => {
     try {
         const postHashtag = await Hashtags.insert(req.body);
@@ -66,7 +66,7 @@ router.post('/hashtags', async (req, res) => {
 });
 
 // UPDATE REQUEST
-// UPDATE SCHOOL REQUEST
+// UPDATE HASHTAG REQUEST
 router.put('/hashtags/:id', async (req, res) => {
     try {
         const id = await req.params.id;
@@ -88,7 +88,7 @@ router.put('/hashtags/:id', async (req, res) => {
 })
 
 // DELETE REQUEST
-// DELETE SCHOOL REQUEST
+// DELETE HASHTAG REQUEST
 router.delete('/hashtags/:id', async (req, res) => {
     try {
         const id = await req.params.id;
