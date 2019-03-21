@@ -21,7 +21,7 @@ function generateToken(student) {
 }
 
 //POST REQUEST FOR REGISTER
-router.post('/register', async (req, res) => {
+router.post('/register', (req, res) => {
     let student = req.body;
 
     const hash = bcrypt.hashSync(student.password, 8)
@@ -33,10 +33,10 @@ router.post('/register', async (req, res) => {
     //     console.log(error)
     //     return res.status(500).json(error)
     // }
-    Students.add(student)
+    Students.insert(student)
         .then(savedStudent => {
             console.log(savedStudent);
-            return res.status(201).json({ savedStudent, token })
+            return res.status(201).json(savedStudent)
         })
         .catch(err => {
             console.log(err)
