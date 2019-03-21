@@ -8,6 +8,7 @@ const studentsRouter = require('./students/students-router');
 const hashtagsRouter = require('./hashtags/hashtags-router');
 const authRouter = require('./config/routes');
 
+
 const server = express();
 
 server.use(express.json());

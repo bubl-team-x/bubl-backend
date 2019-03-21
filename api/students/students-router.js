@@ -1,10 +1,11 @@
 const router = require('express').Router();
 
 const Students = require('./students-model');
+const { authenticate } = require('../auth/authenticate');
 
 // GET REQUEST
 // GET ALL STUDENTS
-router.get('/students', (req, res) => {
+router.get('/students', authenticate, (req, res) => {
     Students.find()
         .then(students => {
             res.status(200).json(students)
