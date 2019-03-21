@@ -37,7 +37,7 @@ router.post('/register', (req, res) => {
     db('students').insert(student)
         .then(savedStudent => {
             console.log(savedStudent);
-            return res.status(201).json(savedStudent)
+            res.status(201).json(savedStudent)
         })
         .catch(err => {
             console.log(err)
