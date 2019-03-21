@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const Hashtags = require('./hashtags-model');
+const db = require('../../data/dbConfig');
 
 // GET REQUEST
 // GET ALL HASHTAGS
@@ -56,7 +57,7 @@ router.get('/hashtags/:id', async (req, res) => {
 // POST HASHTAG REQUEST
 router.post('/hashtags', async (req, res) => {
     try {
-        const postHashtag = await Hashtags.insert(req.body);
+        const postHashtag = await db('hashtags').insert(req.body);
         res.status(201).json(postHashtag)
     } catch {
         res.status(500).json({
