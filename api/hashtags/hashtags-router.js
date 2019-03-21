@@ -1,7 +1,7 @@
 const router = require('express').Router();
-
-const Hashtags = require('./hashtags-model');
 const db = require('../../data/dbConfig');
+const Hashtags = require('./hashtags-model');
+
 
 // GET REQUEST
 // GET ALL HASHTAGS
@@ -55,16 +55,26 @@ router.get('/hashtags/:id', async (req, res) => {
 
 // POST REQUEST
 // POST HASHTAG REQUEST
-router.post('/hashtags', async (req, res) => {
-    try {
-        const postHashtag = await Hashtags.add(req.body);
-        console.log(postHashtag)
-        res.status(201).json(postHashtag)
-    } catch {
-        res.status(500).json({
-            error: 'Create hashtag failed'
+router.post('/hashtags', (req, res) => {
+    let hashtag = req.body
+    console.log(hashtag)
+    db('hashtags').insert(hashtag)
+        .then(savedHashtag => {
+            res.status(201).json(savedHashtag)
         })
-    }
+        .catch(err => {
+            res.status(500).json(err)
+        })
+
+    // try {
+    //     const postHashtag = await Hashtags.add(req.body);
+    //     console.log(postHashtag)
+    //     res.status(201).json(postHashtag)
+    // } catch {
+    //     res.status(500).json({
+    //         error: 'Create hashtag failed'
+    //     })
+    // }
 });
 
 // UPDATE REQUEST
