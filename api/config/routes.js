@@ -21,7 +21,7 @@ function generateToken(student) {
 }
 
 //POST REQUEST FOR REGISTER
-router.post('/register', async, (req, res) => {
+router.post('/register', async (req, res) => {
     let student = req.body;
 
     const hash = bcrypt.hashSync(student.password, 8)
