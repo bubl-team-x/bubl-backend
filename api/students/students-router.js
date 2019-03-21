@@ -5,7 +5,7 @@ const { authenticate } = require('../auth/authenticate');
 
 // GET REQUEST
 // GET ALL STUDENTS
-router.get('/students', authenticate, (req, res) => {
+router.get('/students', (req, res) => {
     Students.find()
         .then(students => {
             res.status(200).json(students)
