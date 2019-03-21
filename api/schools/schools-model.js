@@ -3,7 +3,7 @@ const db = require('../../data/dbConfig');
 module.exports = {
     find,
     findById,
-    insert,
+    add,
     update,
     remove
 }
@@ -26,10 +26,13 @@ function findById(id) {
         .first()
 }
 
-async function insert(school) {
-    return db('schools')
-        .insert(school)
-        .then(([id]) => this.find(id))
+async function add(school) {
+    const [id] = await db('schools').insert(school)
+    return findById(id)
+
+    // return db('schools')
+    //     .insert(school)
+    //     .then(([id]) => this.find(id))
 }
 
 function update(id, changes) {
@@ -42,5 +45,5 @@ function update(id, changes) {
 function remove(id) {
     return db('schools')
         .where('id', id)
-        .truncate()
+        .del()
 }

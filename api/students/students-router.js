@@ -1,9 +1,10 @@
 const router = require('express').Router();
 
 const Students = require('./students-model');
+const { authenticate } = require('../auth/authenticate');
 
 // GET REQUEST
-// GET ALL SCHOOLS
+// GET ALL STUDENTS
 router.get('/students', (req, res) => {
     Students.find()
         .then(students => {
@@ -16,10 +17,10 @@ router.get('/students', (req, res) => {
         })
 });
 
-// GET SCHOOL REQUEST
+// GET STUDENT REQUEST
 router.get('/students/:id', async (req, res) => {
     try {
-        const student = await Students.find(req.params.id)
+        const student = await Students.findStudentById(req.params.id)
 
         if (student) {
             res.status(200).json(student)
@@ -37,10 +38,11 @@ router.get('/students/:id', async (req, res) => {
 })
 
 // POST REQUEST
-// POST SCHOOL REQUEST
+// POST STUDENT REQUEST
 router.post('/students', async (req, res) => {
     try {
-        const postStudent = await Students.insert(req.body);
+        console.log(req.body)
+        const postStudent = await Students.add(req.body);
         res.status(201).json(postStudent)
     } catch {
         res.status(500).json({
@@ -50,7 +52,7 @@ router.post('/students', async (req, res) => {
 });
 
 // UPDATE REQUEST
-// UPDATE SCHOOL REQUEST
+// UPDATE STUDENT REQUEST
 router.put('/students/:id', async (req, res) => {
     try {
         const id = await req.params.id;
@@ -72,7 +74,7 @@ router.put('/students/:id', async (req, res) => {
 })
 
 // DELETE REQUEST
-// DELETE SCHOOL REQUEST
+// DELETE STUDENT REQUEST
 router.delete('/students/:id', async (req, res) => {
     try {
         const id = await req.params.id;

@@ -5,7 +5,8 @@ module.exports = {
     findById,
     insert,
     update,
-    remove
+    remove,
+    add
 }
 
 function find(id) {
@@ -18,6 +19,8 @@ function find(id) {
     }
 
     return query
+        .select('label')
+        .orderBy('label')
 }
 
 function findById(id) {
@@ -26,9 +29,14 @@ function findById(id) {
         .first()
 }
 
-async function insert(school) {
-    return db('hashtags')
-        .insert(school)
+async function add(hashtag) {
+    const [id] = await db('hashtags').insert(hashtag)
+    return findById(id)
+}
+
+async function insert(hashtag) {
+    db('hashtags')
+        .insert(hashtag)
         .then(([id]) => this.find(id))
 }
 
@@ -42,5 +50,5 @@ function update(id, changes) {
 function remove(id) {
     return db('hashtags')
         .where('id', id)
-        .truncate()
+        .del()
 }

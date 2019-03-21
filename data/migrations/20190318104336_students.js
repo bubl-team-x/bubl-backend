@@ -15,7 +15,17 @@ exports.up = function (knex, Promise) {
         students
             .string('school_name', 128)
             .notNullable()
+
+        students
+            .integer('age')
+
+        students
+            .string('hobbies', 512)
+
+        students
+            .integer('height')
     });
+
 };
 
 exports.down = function (knex, Promise) {

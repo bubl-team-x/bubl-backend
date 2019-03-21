@@ -1,13 +1,30 @@
 const router = require('express').Router();
-
+const db = require('../../data/dbConfig');
 const Hashtags = require('./hashtags-model');
 
+
 // GET REQUEST
-// GET ALL SCHOOLS
+// GET ALL HASHTAGS
 router.get('/hashtags', (req, res) => {
     Hashtags.find()
         .then(hashtags => {
-            res.status(200).json(hashtags)
+            let value = 1;
+            let displayHashtags = [];
+            const newHashtags = hashtags.map(hashtag => {
+                return hashtag.label
+            });
+
+            for (let i = 0; i < newHashtags.length; i++) {
+                console.log(newHashtags[i])
+                if (newHashtags[i] === newHashtags[i + 1]) {
+                    value = value + 1;
+                } else {
+                    displayHashtags.push({ label: newHashtags[i], value: value })
+                    value = 1;
+                }
+            };
+
+            res.status(200).json(displayHashtags)
         })
         .catch(error => {
             res.status(500).json({
@@ -16,7 +33,7 @@ router.get('/hashtags', (req, res) => {
         })
 });
 
-// GET SCHOOL REQUEST
+// GET INDIVIDUAL HASHTAG REQUEST
 router.get('/hashtags/:id', async (req, res) => {
     try {
         const hashtag = await Hashtags.find(req.params.id)
@@ -37,20 +54,31 @@ router.get('/hashtags/:id', async (req, res) => {
 })
 
 // POST REQUEST
-// POST SCHOOL REQUEST
-router.post('/hashtags', async (req, res) => {
-    try {
-        const postHashtag = await Hashtags.insert(req.body);
-        res.status(201).json(postHashtag)
-    } catch {
-        res.status(500).json({
-            error: 'Create hashtag failed'
+// POST HASHTAG REQUEST
+router.post('/hashtags', (req, res) => {
+    let hashtag = req.body
+    console.log(hashtag)
+    db('hashtags').insert(hashtag)
+        .then(savedHashtag => {
+            res.status(201).json(savedHashtag)
         })
-    }
+        .catch(err => {
+            res.status(500).json(err)
+        })
+
+    // try {
+    //     const postHashtag = await Hashtags.add(req.body);
+    //     console.log(postHashtag)
+    //     res.status(201).json(postHashtag)
+    // } catch {
+    //     res.status(500).json({
+    //         error: 'Create hashtag failed'
+    //     })
+    // }
 });
 
 // UPDATE REQUEST
-// UPDATE SCHOOL REQUEST
+// UPDATE HASHTAG REQUEST
 router.put('/hashtags/:id', async (req, res) => {
     try {
         const id = await req.params.id;
@@ -72,7 +100,7 @@ router.put('/hashtags/:id', async (req, res) => {
 })
 
 // DELETE REQUEST
-// DELETE SCHOOL REQUEST
+// DELETE HASHTAG REQUEST
 router.delete('/hashtags/:id', async (req, res) => {
     try {
         const id = await req.params.id;
