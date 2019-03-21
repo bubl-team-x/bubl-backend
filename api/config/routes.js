@@ -26,24 +26,22 @@ router.post('/register', async (req, res) => {
 
     const hash = bcrypt.hashSync(student.password, 8)
     student.password = hash;
-    try {
-        const newStudent = await Students.add(student)
-
-        return res.status(201).json(newStudent)
-
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json(error)
-    }
-    // Students.add(student)
-    //     .then(savedStudent => {
-    //         console.log(savedStudent);
-    //         const token = generateToken(student)
-    //         return res.status(201).json({ savedStudent, token })
-    //     })
-    //     .catch(err => {
-    //         res.status(500).json(err)
-    //     })
+    // try {
+    //     const newStudent = await Students.add(student)
+    //     return res.status(201).json(newStudent)
+    // } catch (error) {
+    //     console.log(error)
+    //     return res.status(500).json(error)
+    // }
+    Students.add(student)
+        .then(savedStudent => {
+            console.log(savedStudent);
+            return res.status(201).json({ savedStudent, token })
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json(err)
+        })
 })
 
 // POST REQUEST FOR LOGIN
