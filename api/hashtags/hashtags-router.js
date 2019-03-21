@@ -55,15 +55,25 @@ router.get('/hashtags/:id', async (req, res) => {
 
 // POST REQUEST
 // POST HASHTAG REQUEST
-router.post('/hashtags', async (req, res) => {
-    try {
-        const postHashtag = await db('hashtags').insert(req.body);
-        res.status(201).json(postHashtag)
-    } catch {
-        res.status(500).json({
-            error: 'Create hashtag failed'
+router.post('/hashtags', (req, res) => {
+    // try {
+    //     const postHashtag = await db('hashtags').insert(req.body);
+    //     res.status(201).json(postHashtag)
+    // } catch {
+    //     res.status(500).json({
+    //         error: 'Create hashtag failed'
+    //     })
+    // }
+    let hashtag = req.body;
+    db('hashtags').insert(hashtag)
+        .then(hash => {
+            res.status(201).json(hash)
         })
-    }
+        .catch(err => {
+            res.status(500).json({
+                message: 'Create hashtag failed'
+            })
+        })
 });
 
 // UPDATE REQUEST
