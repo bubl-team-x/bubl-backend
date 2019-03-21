@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const db = require('../../data/dbConfig');
 
 const Schools = require('./schools-model');
 
@@ -38,15 +39,25 @@ router.get('/schools/:id', async (req, res) => {
 
 // POST REQUEST
 // POST SCHOOL REQUEST
-router.post('/schools', async (req, res) => {
-    try {
-        const postSchool = await Schools.add(req.body);
-        res.status(201).json(postSchool)
-    } catch {
-        res.status(500).json({
-            error: 'Create School failed'
+router.post('/schools', (req, res) => {
+    db('schools').insert(req.body)
+        .then(savedSchool => {
+            console.log(savedSchool);
+            res.status(201).json(savedSchool)
         })
-    }
+        .catch(err => {
+            console.log(err)
+            res.status(500).json(err)
+        })
+
+    // try {
+    //     const postSchool = await Schools.add(req.body);
+    //     res.status(201).json(postSchool)
+    // } catch {
+    //     res.status(500).json({
+    //         error: 'Create School failed'
+    //     })
+    // }
 });
 
 // UPDATE REQUEST

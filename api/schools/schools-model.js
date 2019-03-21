@@ -26,10 +26,13 @@ function findById(id) {
         .first()
 }
 
-function add(school) {
-    return db('schools')
-        .insert(school)
-        .then(([id]) => this.find(id))
+async function add(school) {
+    const [id] = await db('schools').insert(school)
+    return findById(id)
+
+    // return db('schools')
+    //     .insert(school)
+    //     .then(([id]) => this.find(id))
 }
 
 function update(id, changes) {
