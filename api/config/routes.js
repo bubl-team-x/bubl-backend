@@ -29,7 +29,7 @@ router.post('/register', async, (req, res) => {
     try {
         const newStudent = await Students.add(student)
 
-        return res.status(201).json({ newStudent })
+        return res.status(201).json(newStudent)
 
     } catch (error) {
         console.log(error)
